@@ -1,0 +1,28 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Issue Labels
+
+# Controls when the workflow will run
+on:
+  pull_request:
+    types: [opened, labeled, unlabeled]
+
+jobs:
+  check_label:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require [scope] label
+        uses: trstringer/require-label-prefix@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          prefix: "[scope]"
+          addLabel: true
+          defaultLabel: "[scope] ⚠️ label needed"
+
+      - name: Require [priority] label
+        uses: trstringer/require-label-prefix@v1
+        with:
+          secret: ${{ github.TOKEN }}
+          prefix: "[scope]"
+          addLabel: true
+          defaultLabel: "[priority] ⚠️ label needed"
